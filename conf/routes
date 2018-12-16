@@ -4,7 +4,7 @@
 
 # Home page 
 GET     /                                       Application.index
-POST    /codUrna                                Terminais.tempoParaUrna
+POST    /tempoParaUrna                          Terminais.tempoParaUrna
 GET     /addTempo                               Terminais.addTempo
 
 # Ignore favicon requests
