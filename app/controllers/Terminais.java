@@ -25,14 +25,14 @@ public class Terminais extends Controller {
    			tempoUrna.tempoTotal = 30;
    			tempoUrna.save();  	
    	   	    pedidoTempo = true;
-   	   		renderText("primeiro pedido de tempo, Agarde um momento!");
+   	   	    ok();
    		}
    		else 
    		{
    			tempUrna.tempoTotal += 30;
    			tempUrna.save();  
    			pedidoTempo = true;
-   			renderText("Segundo pedido de tempo, Agarde um momento!");
+   			ok();
    		}	
     }
 
