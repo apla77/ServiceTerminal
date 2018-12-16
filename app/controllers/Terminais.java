@@ -27,8 +27,7 @@ public class Terminais extends Controller {
    	   	    pedidoTempo = true;
    	   	    ok();
    		}
-   		else 
-   		{
+   		else {
    			tempUrna.tempoTotal += 30;
    			tempUrna.save();  
    			pedidoTempo = true;
