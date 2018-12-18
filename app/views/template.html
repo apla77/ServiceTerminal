@@ -1,54 +1,94 @@
 <!DOCTYPE html>
+
+        <meta charset="utf-8">
 <html>
-<head>
-	<meta charset="utf-8">
-	<title>Terminal</title>
-	<link rel="shortcut icon" href="@{'/public/images/icone.png'}">
-	<link rel="stylesheet" media="screen" href="@{'/public/css/bootstrap-theme.min.css'}">
-	<link rel="stylesheet" media="screen" href="@{'/public/css/bootstrap.min.css'}">
-	<link rel="stylesheet" media="screen" href="@{'/public/css/ver.css'}">
-	#{get 'moreStyles' /}
-</head>
-<body>	
-
-	<div id="main-content">
-		<nav id="cor" class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
-			<div class="container-fluid">
+    <head>
+        <title>Terminal Documentação API</title>
+        <link rel="shortcut icon" type="image/png" href="/public/images/favicon.png">
+        <link rel="stylesheet" media="screen" href="/public/stylesheets/main.css">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        	</head>
 	
-				<div class="navbar-header">
-	
-					<img src="@{'/public/images/slg.png'}" width="30" height="30" alt="">
-					<a class="navbar-brand" href="@{Application.index}">Terminal Eleitoral</a>
-	
+	<div class="navbar">
+		<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+					<h4 class="brand"><a href="#">Documentação API Terminal TSE</a></h4>
+					<!-- navigation -->
 				</div>
-	
-				<ul class="nav justify-content-end">
-	
-					<form action="/eleitores/getEleitor" method="post" class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
-						<div class="form-group mb-0">
-							<div class="input-group input-group-alternative">
-								<div class="input-group-prepend">
-									<span class="input-group-text"><i class="fas fa-search"></i></span>
-								</div>
-								<input id="txtBusca" class="form-control" placeholder="....." type="text">
-								
-							</div>
-						</div>
-					</form>
-	
-					<li class="nav-item"><a class="nav-link active" href="#">Sair</a>
-					</li>
-				</ul>
+				
 			</div>
-		</nav>
+		</div>
 	</div>
-	
+    <body>
 
-	#{doLayout /}
-	
-	<script src="@{'/public/js/jquery-1.6.4.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
-	<script src="@{'/public/js/bootstrap.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
-	#{get 'moreScript' /}
-	
-</body>
+<div class="container demo">
+
+    
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <i class="post">POST</i>
+                        /tempoParaUrna
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                      Obtém o id do voto atual da urna (codigo da Urna)
+                      <br>
+                      Parâmetro (Long codUrna)                      
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwo">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <i class="post">GET</i>
+                        /addTempo
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="panel-body">
+                    Verifica se a urna solicitou tempo
+                    <br>
+                    Retorna como parâmetro um boolean (true ou false)
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingThree">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <i class="post">GET</i>
+                        /......
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                <div class="panel-body">
+                    ...
+                    <br>
+                    ....
+                </div>
+            </div>
+        </div>
+
+    </div><!-- panel-group -->
+    
+    
+</div><!-- container -->
+
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        </body>
 </html>
