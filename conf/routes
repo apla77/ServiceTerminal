@@ -4,6 +4,8 @@
 
 # Home page 
 GET     /                                       Application.index
+POST    /finalizarVotacaoAtual                  Terminais.finalizarVotacaoAtual
+GET     /confirmarVotacaoAtual                  Terminais.confirmarVotacaoAtual
 POST    /tempoParaUrna                          Terminais.tempoParaUrna
 GET     /addTempo                               Terminais.addTempo
 

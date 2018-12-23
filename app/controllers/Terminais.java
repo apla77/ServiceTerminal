@@ -14,6 +14,21 @@ import play.mvc.results.RenderText;
 public class Terminais extends Controller { 
 	private static boolean pedidoTempo = false;
 	
+	public static void finalizarVotacaoAtual(String status) {
+		
+		if(status.equals("finalizado")) {
+			ok();
+			confirmarVotacaoAtual(true);
+		}
+		else {
+			confirmarVotacaoAtual(false);
+		}
+	}
+	
+	public static boolean confirmarVotacaoAtual(boolean confirmar) {
+		return confirmar;
+	}
+	
     public static void tempoParaUrna(int codUrna){	
     	
    		TempoUrna tempUrna = TempoUrna.find("codUrna = ?", codUrna).first();
