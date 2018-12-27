@@ -21,11 +21,13 @@ public class Terminais extends Controller {
 			confirmarVotacaoAtual(true);
 		}
 		else {
+			ok();
 			confirmarVotacaoAtual(false);
 		}
 	}
 	
 	public static boolean confirmarVotacaoAtual(boolean confirmar) {
+		ok();
 		return confirmar;
 	}
 	
