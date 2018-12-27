@@ -17,17 +17,17 @@ public class Terminais extends Controller {
 	public static void finalizarVotacaoAtual(String status) {
 		
 		if(status.equals("finalizado")) {
-			ok();
+			
 			confirmarVotacaoAtual(true);
+			ok();
 		}
 		else {
-			ok();
 			confirmarVotacaoAtual(false);
+			ok();
 		}
 	}
 	
 	public static boolean confirmarVotacaoAtual(boolean confirmar) {
-		ok();
 		return confirmar;
 	}
 	
