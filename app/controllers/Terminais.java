@@ -13,26 +13,25 @@ import play.mvc.results.RenderText;
 
 public class Terminais extends Controller { 
 	private static boolean pedidoTempo = false;
+	private static boolean fimVoto = false;
 	
 	public static void finalizarVotacaoAtual(String status) {
-		
-		if(status.equals("finalizado")) {
+		if(status.equals("finalizado")) 
 			
-			confirmarVotacaoAtual(true);
-			ok();
-		}
-		else {
-			confirmarVotacaoAtual(false);
-			ok();
-		}
+			fimVoto = true;
+		ok();
 	}
 	
-	public static boolean confirmarVotacaoAtual(boolean confirmar) {
-		return confirmar;
+	public static void confirmarVotacaoAtual() {
+		if(fimVoto) {
+			fimVoto = false;
+			renderJSON(true);
+		}
+		else
+			renderJSON(false);
 	}
 	
-    public static void tempoParaUrna(int codUrna){	
-    	
+    public static void tempoParaUrna(int codUrna){		
    		TempoUrna tempUrna = TempoUrna.find("codUrna = ?", codUrna).first();
    		if(tempUrna == null) 
    		{   			
@@ -51,13 +50,13 @@ public class Terminais extends Controller {
    			ok();
    		}	
     }
-
      public static void addTempo(){
 
     	 if(pedidoTempo == true) {
     		  pedidoTempo = false; 
     		  renderJSON(true);  
     	  }
-    	  renderJSON(false);
+    	 else
+    		 renderJSON(false);
       }    
 }
