@@ -14,31 +14,31 @@ import play.mvc.results.RenderText;
 public class Terminais extends Controller { 
 	private static boolean pedidoTempo = false;
 	private static boolean fimVoto = false;
-	private static String ip_urnaVoto = "";
-	private static String ip_urnaTempo = "";
+	private static String ip_terminalVoto = "";
+	private static String ip_terminalTempo = "";
 	
-	public static void finalizarVotacaoAtual(String status, String ipUrna) { 
-		ip_urnaVoto = ipUrna;
-		if(status.equals("finalizado") && ipUrna != "") {
+	public static void finalizarVotacaoAtual(String status, String ipTerminal) { 
+		ip_terminalVoto = ipTerminal;
+		if(status.equals("finalizado") && ipTerminal != "") {
 			fimVoto = true;
 		}
 		ok();
 	}
 	
-	public static void confirmarVotacaoAtual(String ipUrna) {
-		if(fimVoto == true && ipUrna == ip_urnaVoto) {
+	public static void confirmarVotacaoAtual(String ipTerminal) {
+		if(fimVoto == true && ipTerminal == ip_terminalVoto) {
 			fimVoto = false;
-			ip_urnaVoto = "";
+			ip_terminalVoto = "";
 			renderJSON(true);
 		}
 		else
 			renderJSON(false);
 	}
 	
-    public static void tempoParaUrna(int codUrna, String ipUrna){	
-    	ip_urnaTempo = ipUrna;
+    public static void tempoParaUrna(int codUrna, String ipTerminal){	
+    	ip_terminalTempo = ipTerminal;
    		TempoUrna tempUrna = TempoUrna.find("codUrna = ?", codUrna).first();
-   		if(tempUrna == null && ipUrna == ip_urnaTempo) 
+   		if(tempUrna == null && ipTerminal == ip_terminalTempo) 
    		{   			
    			TempoUrna tempoUrna = new TempoUrna();
    			tempoUrna.data = new Date();
@@ -48,7 +48,7 @@ public class Terminais extends Controller {
    	   	    pedidoTempo = true;
    	   	    ok();
    		}
-   		else if(ipUrna == ip_urnaTempo){
+   		else if(ipTerminal == ip_terminalTempo){
    			tempUrna.tempoTotal += 30;
    			tempUrna.save();  
    			pedidoTempo = true;
@@ -56,11 +56,11 @@ public class Terminais extends Controller {
    		}	
     }
     
-     public static void addTempo(String ipUrna){
+     public static void addTempo(String ipTerminal){
 
-    	 if(pedidoTempo == true && ipUrna == ip_urnaTempo) {
+    	 if(pedidoTempo == true && ipTerminal == ip_terminalTempo) {
     		  pedidoTempo = false; 
-    		  ip_urnaTempo = "";
+    		  ip_terminalTempo = "";
     		  renderJSON(true);  
     	  }
     	 else
