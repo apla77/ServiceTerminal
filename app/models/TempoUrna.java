@@ -12,7 +12,7 @@ import play.db.jpa.Model;
 public class TempoUrna extends Model{
 	
 	public Date data; 
-	public int codUrna;
+	public Long codUrna;
 	public int tempoTotal;
 
 }

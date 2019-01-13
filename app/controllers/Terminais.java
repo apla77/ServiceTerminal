@@ -35,7 +35,7 @@ public class Terminais extends Controller {
 			renderJSON(false);
 	}
 	
-    public static void tempoParaUrna(int codUrna, String ipTerminal){	
+    public static void tempoParaUrna(Long codUrna, String ipTerminal){	
     	ip_terminalTempo = ipTerminal;
    		TempoUrna tempUrna = TempoUrna.find("codUrna = ?", codUrna).first();
    		if(tempUrna == null && ipTerminal == ip_terminalTempo) 
