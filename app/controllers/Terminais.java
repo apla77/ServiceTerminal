@@ -14,26 +14,31 @@ import play.mvc.results.RenderText;
 public class Terminais extends Controller { 
 	private static boolean pedidoTempo = false;
 	private static boolean fimVoto = false;
+	private static String ip_urnaVoto = "";
+	private static String ip_urnaTempo = "";
 	
-	public static void finalizarVotacaoAtual(String status) {
-		if(status.equals("finalizado")) 
-			
+	public static void finalizarVotacaoAtual(String status, String ipUrna) { 
+		ip_urnaVoto = ipUrna;
+		if(status.equals("finalizado") && ipUrna != "") {
 			fimVoto = true;
+		}
 		ok();
 	}
 	
-	public static void confirmarVotacaoAtual() {
-		if(fimVoto) {
+	public static void confirmarVotacaoAtual(String ipUrna) {
+		if(fimVoto == true && ipUrna == ip_urnaVoto) {
 			fimVoto = false;
+			ip_urnaVoto = "";
 			renderJSON(true);
 		}
 		else
 			renderJSON(false);
 	}
 	
-    public static void tempoParaUrna(int codUrna){		
+    public static void tempoParaUrna(int codUrna, String ipUrna){	
+    	ip_urnaTempo = ipUrna;
    		TempoUrna tempUrna = TempoUrna.find("codUrna = ?", codUrna).first();
-   		if(tempUrna == null) 
+   		if(tempUrna == null && ipUrna == ip_urnaTempo) 
    		{   			
    			TempoUrna tempoUrna = new TempoUrna();
    			tempoUrna.data = new Date();
@@ -43,17 +48,19 @@ public class Terminais extends Controller {
    	   	    pedidoTempo = true;
    	   	    ok();
    		}
-   		else {
+   		else if(ipUrna == ip_urnaTempo){
    			tempUrna.tempoTotal += 30;
    			tempUrna.save();  
    			pedidoTempo = true;
    			ok();
    		}	
     }
-     public static void addTempo(){
+    
+     public static void addTempo(String ipUrna){
 
-    	 if(pedidoTempo == true) {
+    	 if(pedidoTempo == true && ipUrna == ip_urnaTempo) {
     		  pedidoTempo = false; 
+    		  ip_urnaTempo = "";
     		  renderJSON(true);  
     	  }
     	 else
