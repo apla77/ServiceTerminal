@@ -4,6 +4,7 @@
 
 # Home page 
 GET     /                                       Application.index
+POST    /setIpterminal                          Terminais.setIpterminal
 POST    /finalizarVotacaoAtual                  Terminais.finalizarVotacaoAtual
 GET     /confirmarVotacaoAtual                  Terminais.confirmarVotacaoAtual
 POST    /tempoParaUrna                          Terminais.tempoParaUrna

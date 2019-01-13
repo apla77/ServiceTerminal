@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.mysql.fabric.xmlrpc.base.Data;
 
 import antlr.collections.List;
+import models.IpTerminal;
 import models.TempoUrna;
 import play.mvc.Controller;
 import play.mvc.results.RenderJson;
@@ -12,58 +13,70 @@ import play.mvc.results.RenderTemplate;
 import play.mvc.results.RenderText;
 
 public class Terminais extends Controller { 
-	private static boolean pedidoTempo = false;
-	private static boolean fimVoto = false;
-	private static String ip_terminalVoto = "";
-	private static String ip_terminalTempo = "";
+	private static boolean pedidoTempo;
+	private static boolean fimVoto;
 	
-	public static void finalizarVotacaoAtual(String status, String ipTerminal) { 
-		ip_terminalVoto = ipTerminal;
-		if(status.equals("finalizado") && ipTerminal != "") {
+	// Consumido pela Terminal 
+	public static void setIpterminal(Long idSecao, String ipTerminal) {
+		IpTerminal ipTerminais = IpTerminal.find("ipTerminal = ?", ipTerminal).first();
+		if(ipTerminais == null) {
+			ipTerminais.ipTerminal = ipTerminal;
+			ipTerminais.idSecao = idSecao;
+			ipTerminais.save();
 			fimVoto = true;
+			renderJSON(true);
 		}
-		ok();
+		else {
+			renderJSON(false);
+		}
+		
 	}
 	
-	public static void confirmarVotacaoAtual(String ipTerminal) {
-		if(fimVoto == true && ipTerminal == ip_terminalVoto) {
+	// Consumido pela Urna
+	public static void finalizarVotacaoAtual(String status, String ipTerminal) { 
+		IpTerminal ipTerminais = IpTerminal.find("ipTerminal = ?", ipTerminal).first();
+		
+		if(status.equals("finalizado") && ipTerminais != null) {
+			fimVoto = true;
+			ok();
+		}else {
 			fimVoto = false;
-			ip_terminalVoto = "";
+			ok();
+		}
+	}
+	
+	// Consumido pela Terminal
+	public static void confirmarVotacaoAtual(String ipTerminal) {
+		IpTerminal ipTerminais = IpTerminal.find("ipTerminal = ?", ipTerminal).first();
+		if(fimVoto == true && ipTerminais != null) {
 			renderJSON(true);
 		}
 		else
 			renderJSON(false);
 	}
 	
+	// Consumido pela Urna
     public static void tempoParaUrna(Long codUrna, String ipTerminal){	
-    	ip_terminalTempo = ipTerminal;
-   		TempoUrna tempUrna = TempoUrna.find("codUrna = ?", codUrna).first();
-   		if(tempUrna == null && ipTerminal == ip_terminalTempo) 
-   		{   			
-   			TempoUrna tempoUrna = new TempoUrna();
-   			tempoUrna.data = new Date();
-   			tempoUrna.codUrna = codUrna;
-   			tempoUrna.tempoTotal = 30;
-   			tempoUrna.save();  	
+    	IpTerminal ipTerminais = IpTerminal.find("ipTerminal = ?", ipTerminal).first();	
+   		if(ipTerminais != null) 
+   		{   	
    	   	    pedidoTempo = true;
    	   	    ok();
    		}
-   		else if(ipTerminal == ip_terminalTempo){
-   			tempUrna.tempoTotal += 30;
-   			tempUrna.save();  
-   			pedidoTempo = true;
+   		else{
+   			pedidoTempo = false; 
    			ok();
    		}	
-    }
+    } 
     
-     public static void addTempo(String ipTerminal){
-
-    	 if(pedidoTempo == true && ipTerminal == ip_terminalTempo) {
-    		  pedidoTempo = false; 
-    		  ip_terminalTempo = "";
+    // Consumido pela Terminal
+    public static void addTempo(String ipTerminal){
+    	 IpTerminal ipTerminais = IpTerminal.find("ipTerminal = ?", ipTerminal).first();	
+    	 if(pedidoTempo == true && ipTerminais != null) {
     		  renderJSON(true);  
     	  }
-    	 else
+    	 else {
     		 renderJSON(false);
+    	 }
       }    
 }
