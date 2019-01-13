@@ -40,7 +40,7 @@
                 <div class="panel-body">
                       Obtém o status da votação atual na urna (finalizado)
                       <br>
-                      Parâmetro (String status)                      
+                      Parâmetro (String status, String ipUrna)                      
                 </div>
             </div>
         </div>
@@ -57,6 +57,8 @@
             <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                 <div class="panel-body">
                       Verifica se a votação atual já foi finalizada
+                      <br>
+                      Parâmetro (String ipUrna)
                       <br>
                       Retorna como parâmetro um boolean (true ou false)                      
                 </div>
@@ -76,7 +78,7 @@
                 <div class="panel-body">
                       Obtém o id do voto atual da urna (codigo da Urna)
                       <br>
-                      Parâmetro (Long codUrna)                      
+                      Parâmetro (Long codUrna, String ipUrna)                      
                 </div>
             </div>
         </div>
@@ -93,6 +95,8 @@
             <div id="collapseFor" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFor">
                 <div class="panel-body">
                     Verifica se a urna solicitou tempo
+                    <br>
+                    Parâmetro (String ipUrna)
                     <br>
                     Retorna como parâmetro um boolean (true ou false)
                 </div>
