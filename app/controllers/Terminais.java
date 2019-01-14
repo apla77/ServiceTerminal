@@ -88,7 +88,8 @@ public class Terminais extends Controller {
     	 System.out.println(" 5 ************************* ipTerminal = " + ipTerminal);
     	 if(pedidoTempo == true && ipTerminais != null) {
     		 System.out.println("No if addTempo");
-    		  renderJSON(true);  
+    		 pedidoTempo = true;
+    		  renderJSON(pedidoTempo);  
     	  }
     	 else {
     		 System.out.println("nada 5");
