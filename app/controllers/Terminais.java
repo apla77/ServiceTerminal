@@ -19,7 +19,6 @@ public class Terminais extends Controller {
 	
 	// Consumido pela Terminal 
 	public static void setIpterminal(String ipTerminal) {
-		System.out.println(" ip = " + ipTerminal);
 		IpTerminal ipTerminais = IpTerminal.find("ipTerminal = ?", ipTerminal).first();
 		if(ipTerminais == null) {
 			IpTerminal ip = new IpTerminal();
