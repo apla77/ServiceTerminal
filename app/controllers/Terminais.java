@@ -16,20 +16,20 @@ public class Terminais extends Controller {
 	private static boolean pedidoTempo;
 	private static boolean fimVoto;
 	
+	
 	// Consumido pela Terminal 
-	public static void setIpterminal(Long idSecao, String ipTerminal) {
+	public static void setIpterminal(String ipTerminal) {
+		System.out.println(" ip = " + ipTerminal);
 		IpTerminal ipTerminais = IpTerminal.find("ipTerminal = ?", ipTerminal).first();
 		if(ipTerminais == null) {
-			ipTerminais.ipTerminal = ipTerminal;
-			ipTerminais.idSecao = idSecao;
-			ipTerminais.save();
-			fimVoto = true;
-			renderJSON(true);
+			IpTerminal ip = new IpTerminal();
+			ip.ipTerminal = ipTerminal;
+			ip.save();
+			ok();
 		}
 		else {
-			renderJSON(false);
-		}
-		
+			notFound();
+		}	
 	}
 	
 	// Consumido pela Urna

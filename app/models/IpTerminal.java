@@ -9,5 +9,5 @@ public class IpTerminal extends Model{
 	
 	public String ipTerminal;
 	public Long idSecao;
-
+ 
 }
