@@ -39,41 +39,36 @@ public class Terminais extends Controller {
 	// Consumido pela Urna
 	public static void finalizarVotacaoAtual(String status, String ipTerminal) { 
 		IpTerminal ipTerminais = IpTerminal.find("ipTerminal = ?", ipTerminal).first();
-		System.out.println(" 2 ************************* ipTerminal = " + ipTerminal);
 		
 		if(status.equals("finalizado") && ipTerminais != null) {
-			System.out.println("No if finalizarVotacaoAtual");
 			fimVoto = true;
 			ok();
 		}else {
-			System.out.println("nada 2");
 			fimVoto = false;
-			ok();
+			notFound();
 		}
 	} 
 	
 	// Consumido pela Terminal
 	public static void confirmarVotacaoAtual(String ipTerminal) {
 		IpTerminal ipTerminais = IpTerminal.find("ipTerminal = ?", ipTerminal).first();
-		System.out.println(" 3 ************************* ipTerminal = " + ipTerminal);
 		if(fimVoto == true && ipTerminais != null) {
 			System.out.println("No if confirmarVotacaoAtual");
 			ConfirmacaoUrna confirma = new ConfirmacaoUrna();
 			confirma.confirma = true;
-			renderJSON(confirma);
+			ok();
 		}
 		else {
 			ConfirmacaoUrna confirma = new ConfirmacaoUrna();
 			confirma.confirma = false;
-			renderJSON(confirma);
-			System.out.println("nada 3");
-			renderJSON(confirma);
+			notFound();
 		}
 			
 	}
 	
 	// Consumido pela Urna
     public static void tempoParaUrna(Long codUrna, String ipTerminal){	
+    	System.out.println(ipTerminal);
     	IpTerminal ipTerminais = IpTerminal.find("ipTerminal = ?", ipTerminal).first();	
     	System.out.println(" 4 ************************* ipTerminal = " + ipTerminal);
    		if(ipTerminais != null) 
@@ -97,12 +92,12 @@ public class Terminais extends Controller {
     		 System.out.println("No if addTempo");
     		  PedidoUrna pedido = new PedidoUrna();
     		  pedido.pedidoTempo = true;
-    		  renderJSON(pedido);  
+    		  ok();  
     	  }
     	 else {
     		 PedidoUrna pedido = new PedidoUrna();
     		 pedido.pedidoTempo = false;
-   		  	 renderJSON(pedido); 
+    		 notFound();
     	 }
       }    
 }
