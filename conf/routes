@@ -6,9 +6,9 @@
 GET     /                                       Application.index
 POST    /setIpterminal                          Terminais.setIpterminal
 POST    /finalizarVotacaoAtual                  Terminais.finalizarVotacaoAtual
-GET     /confirmarVotacaoAtual                  Terminais.confirmarVotacaoAtual
+GET     /confirmarVotacaoAtual/{ipTerminal}     Terminais.confirmarVotacaoAtual
 POST    /tempoParaUrna                          Terminais.tempoParaUrna
-GET     /addTempo                               Terminais.addTempo
+GET     /addTempo/{ipTerminal}                  Terminais.addTempo
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
