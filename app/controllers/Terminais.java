@@ -92,8 +92,8 @@ public class Terminais extends Controller {
     		  renderJSON(pedidoTempo);  
     	  }
     	 else {
-    		 System.out.println("nada 5");
-    		 renderJSON(false);
+    		 pedidoTempo = false;
+   		  	 renderJSON(pedidoTempo); 
     	 }
       }    
 }
