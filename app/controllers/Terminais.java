@@ -12,6 +12,22 @@ import play.mvc.results.RenderJson;
 import play.mvc.results.RenderTemplate;
 import play.mvc.results.RenderText;
 
+package controllers;
+
+import java.util.Date;
+import com.google.gson.Gson;
+import com.mysql.fabric.xmlrpc.base.Data;
+
+import antlr.collections.List;
+import models.IpTerminal;
+import models.TempoUrna;
+import models.PedidoUrna;
+import models.ConfirmacaoUrna;
+import play.mvc.Controller;
+import play.mvc.results.RenderJson;
+import play.mvc.results.RenderTemplate;
+import play.mvc.results.RenderText;
+
 public class Terminais extends Controller { 
 	private static boolean pedidoTempo;
 	private static boolean fimVoto;
@@ -56,11 +72,16 @@ public class Terminais extends Controller {
 		System.out.println(" 3 ************************* ipTerminal = " + ipTerminal);
 		if(fimVoto == true && ipTerminais != null) {
 			System.out.println("No if confirmarVotacaoAtual");
-			renderJSON(true);
+			ConfirmacaoUrna confirma = new ConfirmacaoUrna();
+			confirma.confirma = true;
+			renderJSON(confirma);
 		}
 		else {
+			ConfirmacaoUrna confirma = new ConfirmacaoUrna();
+			confirma.confirma = false;
+			renderJSON(confirma);
 			System.out.println("nada 3");
-			renderJSON(false);
+			renderJSON(confirma);
 		}
 			
 	}
@@ -88,12 +109,14 @@ public class Terminais extends Controller {
     	 System.out.println(" 5 ************************* ipTerminal = " + ipTerminal);
     	 if(pedidoTempo == true && ipTerminais != null) {
     		 System.out.println("No if addTempo");
-    		 pedidoTempo = true;
-    		  renderJSON(pedidoTempo);  
+    		  PedidoUrna pedido = new PedidoUrna();
+    		  pedido.pedidoTempo = true;
+    		  renderJSON(pedido);  
     	  }
     	 else {
-    		 pedidoTempo = false;
-   		  	 renderJSON(pedidoTempo); 
+    		 PedidoUrna pedido = new PedidoUrna();
+    		 pedido.pedidoTempo = false;
+   		  	 renderJSON(pedido); 
     	 }
       }    
 }
